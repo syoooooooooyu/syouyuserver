@@ -1,0 +1,5 @@
+name: syouyu-server-core
+main: syouyu\server_core\Main
+api: 4.0.0
+version: 1.0.0
+author: syouyu
