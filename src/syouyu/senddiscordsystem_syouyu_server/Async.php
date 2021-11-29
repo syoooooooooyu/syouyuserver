@@ -26,7 +26,7 @@ class async extends AsyncTask{
 		curl_setopt($cr, CURLOPT_HTTPHEADER, [
 			"Content-Type: application/json",
 		]);
-                curl_exec($cr);
+		curl_exec($cr);
 		curl_close($cr);
 	}
 }
