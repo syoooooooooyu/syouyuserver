@@ -42,6 +42,10 @@ class Main extends \pocketmine\plugin\PluginBase{
 
 	}
 
+    public function onDisable(){
+        LoggerSystemAPI::getInstance()->onDisable();
+    }
+
 	#[Pure] public function resource() : string{
 		return $this->getFile()."resources/";
 	}
