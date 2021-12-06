@@ -11,6 +11,6 @@ class PlayerChat implements \pocketmine\event\Listener{
 	public function e(PlayerChatEvent $e){
 		$name = $e->getPlayer()->getName();
 		$content = $e->getMessage();
-		Server::getInstance()->getAsyncPool()->submitTask(new Async("`$name: $content`"));
+		Server::getInstance()->getAsyncPool()->submitTask(new Async("$name",": $content"));
 	}
 }

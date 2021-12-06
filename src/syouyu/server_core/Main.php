@@ -5,6 +5,7 @@ namespace syouyu\server_core;
 use JetBrains\PhpStorm\Pure;
 use pocketmine\permission\Permission;
 use pocketmine\permission\PermissionManager;
+use pocketmine\Server;
 use syouyu\loggersystem_syouyu_server\command\checkLog;
 use syouyu\loggersystem_syouyu_server\LoggerSystemAPI;
 use syouyu\moneysystem_syouyu_server\command\addMoney;
@@ -18,6 +19,7 @@ use syouyu\moneysystem_syouyu_server\command\startPos;
 use syouyu\moneysystem_syouyu_server\JobSystemAPI;
 use syouyu\moneysystem_syouyu_server\LandAPI;
 use syouyu\moneysystem_syouyu_server\MoneySystemAPI;
+use syouyu\senddiscordsystem_syouyu_server\async;
 use syouyu\senddiscordsystem_syouyu_server\PlayerChat;
 use syouyu\server_core\event\PlayerJoin;
 
@@ -39,12 +41,13 @@ class Main extends \pocketmine\plugin\PluginBase{
 		$api = new JobSystemAPI();
 		$api->__load($this, $this->getFile());
 		$this->registerCommands();
-
+		Server::getInstance()->getAsyncPool()->submitTask(new async("起動", "サーバーが起動しました。"));
 	}
 
-    public function onDisable(){
-        LoggerSystemAPI::getInstance()->onDisable();
-    }
+	public function onDisable() : void{
+		LoggerSystemAPI::getInstance()->onDisable();
+		Server::getInstance()->getAsyncPool()->submitTask(new async("終了", "サーバーがシャットダウンしました。"));
+	}
 
 	#[Pure] public function resource() : string{
 		return $this->getFile()."resources/";
