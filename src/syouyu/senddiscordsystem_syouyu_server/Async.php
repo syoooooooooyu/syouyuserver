@@ -10,6 +10,7 @@ class async extends AsyncTask{
 	private static string $str;
 	/** @var string */
 	private static string $username;
+	const url = "";
 
 	public function __construct(string $username, string $str){
 		self::$str = $str;
@@ -23,7 +24,7 @@ class async extends AsyncTask{
 
 	public static function send($str, $name){
 		$cr = curl_init();
-		curl_setopt($cr, CURLOPT_URL, "https://discord.com/api/webhooks/902146671348170793/fijYEFHEur9sQpc7ldksKjhGEE0o7EftAfLQvSAqjP63U-5eJ0qg-y7a1ArXYfJ9gfz2");
+		curl_setopt($cr, CURLOPT_URL, self::url);
 		curl_setopt($cr, CURLOPT_POST, true);
 		curl_setopt($cr, CURLOPT_POSTFIELDS, json_encode(["username" => $name, "avatar_url" => "https://github.com/qiita.png","content" => $str]));
 		curl_setopt($cr, CURLOPT_HTTPHEADER, [
