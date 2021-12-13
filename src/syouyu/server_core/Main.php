@@ -5,6 +5,7 @@ namespace syouyu\server_core;
 use JetBrains\PhpStorm\Pure;
 use pocketmine\permission\Permission;
 use pocketmine\permission\PermissionManager;
+use pocketmine\permission\PermissionParser;
 use pocketmine\Server;
 use syouyu\loggersystem_syouyu_server\command\checkLog;
 use syouyu\loggersystem_syouyu_server\LoggerSystemAPI;
@@ -30,7 +31,7 @@ class Main extends \pocketmine\plugin\PluginBase{
 
 	protected function onEnable() : void{
 		$this->registerEvent();
-		PermissionManager::getInstance()->addPermission(new Permission("op"));
+		PermissionManager::getInstance()->addPermission(new Permission(PermissionParser::DEFAULT_OP));
 		self::$instance = $this;
 		$api = new MoneySystemAPI();
 		$api->__load($this);
